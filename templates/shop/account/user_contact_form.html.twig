@@ -1,0 +1,14 @@
+{{ form_start(address_form, { 'attr': { 'id': 'user-contact-form' }}) }}
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form_label(address_form.firstName, 'Nom') }}
+            {{ form_widget(address_form.firstName) }}
+        </div>
+        <div class="col form-group">
+            {{ form_label(address_form.lastName, 'Prénom') }}
+            {{ form_widget(address_form.lastName) }}
+        </div>
+    </div>
+    {% set address = address_form.address %}
+    {% include 'shop/account/address_form.html.twig' with {'address_form': address } %}
+{{ form_end(address_form) }}

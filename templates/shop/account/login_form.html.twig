@@ -1,0 +1,24 @@
+{% if error %}
+    <div class="invalid-feedback d-block">
+        <span class="initialism form-error-icon badge badge-danger">Erreur</span>
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+{{ form_start(loginForm) }}
+    {{ form_row(loginForm.username, {
+        'full_name': '_email',
+        'value': lastUserName,
+        'label': 'E-mail',
+    }) }}
+    {{ form_row(loginForm.plainPassword, {
+        'full_name': '_password',
+        'label': 'Mot de passe',
+    }) }}
+   
+    {% if order == true %}
+        <input type="hidden" name="_target_path" value="{{ path('checkout_address') }}" />
+    {% endif %}
+  
+    <input type="submit" value="Connexion" class="btn btn-primary">
+{{ form_end(loginForm) }}
