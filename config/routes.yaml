@@ -1,0 +1,124 @@
+index:
+    path: /
+    controller: App\Controller\ProductController::index
+
+product_show:
+    path: /product/{slug}
+    controller: App\Controller\ProductController::show
+    requirements:
+        slug: '[a-zA-Z1-9\-]+'
+
+admin_index:
+    path: /admin
+    controller: App\Controller\Admin\AdminController::index
+
+admin_product-index:
+    path: /admin/all-products/{page}
+    controller: App\Controller\Admin\ProductController::index
+    defaults: { page: 1 }
+    requirements:
+        page: '\d+'
+
+admin_product-editor:
+    path: /admin/product-editor/{id}
+    controller: App\Controller\Admin\ProductController::editor
+    defaults: { id: null }
+    requirements:
+        id: '\d+'
+
+admin_product-delete:
+    path: /admin/delete-product/{id}
+    controller: App\Controller\Admin\ProductController::delete
+    requirements:
+        id: '\d+'
+
+admin_order-index:
+    path: /admin/orders
+    controller: App\Controller\Admin\OrderController::index
+
+admin_order-show:
+    path: /admin/order-details/{id}
+    controller: App\Controller\Admin\OrderController::show
+    requirements:
+        id: '\d+'
+
+basket_show:
+    path: /basket
+    controller: App\Controller\BasketController::show
+
+basket_add:
+    path: /basket/add/{id}
+    controller: App\Controller\BasketController::add
+    requirements:
+        id: '\d+'
+
+basket_remove:
+    path: /basket/remove/{id}
+    controller: App\Controller\BasketController::remove
+    requirements:
+        id: '\d+'
+
+basket_update:
+    path: /basket/update
+    controller: App\Controller\BasketController::update
+
+user_welcome:
+    path: /user/welcome
+    controller: App\Controller\UserController::welcome
+
+security_login:
+    path: /internal/login
+    controller: App\Controller\SecurityController::login
+
+security_register:
+    path: /internal/register
+    controller: App\Controller\SecurityController::register
+
+security_change-password:
+    path: /user/account/change-password
+    controller: App\Controller\SecurityController::changePassword
+
+security_logout:
+    path: /user/logout
+
+user_account:
+    path: /user/account
+    controller: App\Controller\UserController::account
+
+user_edit-address:
+    path: /user/account/edit-address
+    controller: App\Controller\UserController::editAddress
+
+user_orders:
+    path: /user/account/orders
+    controller: App\Controller\UserController::orders
+
+user_order:
+    path: /user/account/order/{id}
+    controller: App\Controller\UserController::order
+    requirements:
+        id: '\d+'
+
+
+
+stripe_checkout:
+    path: /checkout/stripe-checkout
+    controller: App\Controller\Payments\StripeController::stripeCheckout
+    methods: [POST]
+
+checkout_address:
+    path: /checkout/address
+    controller: App\Controller\CheckoutController::address
+
+checkout_shipping:
+    path: /checkout/shipping
+    controller: App\Controller\CheckoutController::shipping
+
+checkout_summary:
+    path: /checkout/summary
+    controller: App\Controller\CheckoutController::summary
+
+checkout_payment:
+    path: /checkout/payment
+    controller: App\Controller\CheckoutController::payment
+

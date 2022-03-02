@@ -1,0 +1,62 @@
+{% extends 'menu.html.twig' %}
+{% block title %}Récapitulatif{% endblock %}
+
+
+
+{% block shop_content %}
+<header class="mb-4 mp-3">
+    <h1>Récapitulatif</h1>
+</header>
+
+<table class="table">
+    <thead>
+        <tr class="row">
+            <th class="col-6">Produit</th>
+            <th class="col">Quantité</th>
+            <th class="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr class="row">
+                <td class="col-6">
+                    <div class="row">
+                        {% set image = product.images|first %}
+                        <div class="col">
+                            <img src="/img/upload/{{ image.name }}" alt="{{ image.description }}" class="img img-fluid">
+                        </div>
+                        <div class="col-6"> 
+                            {{ product.name }}
+                        </div>
+                    </div>
+                </td>
+                <td  class="col">{{ product.quantity }}</td>
+                <td class="col">{{ product.calcTotalPrice }} DT</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+    <div>
+        <p>
+            <span class="font-weight-bold">Sous total:</span> {{ total_price }} DT
+        </p>
+        <p>
+            <span class="font-weight-bold">Livraison:</span>
+            {% if shipping_fee == 0 %}
+                gratuite
+            {% else %}
+                {{ shipping_fee }} DT
+            {% endif %}
+        </p>
+       
+        <p>
+            <span class="font-weight-bold">Total à payer:</span>
+            {{ grand_total }} DT
+        </p>
+    </div>
+</div>
+
+<a href="{{ path('checkout_payment') }}" class="btn btn-primary">Suivant</a>
+{% endblock %}

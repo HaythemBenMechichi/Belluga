@@ -1,0 +1,15 @@
+{% extends 'menu.html.twig' %}
+{% block title %}Adresse{% endblock %}
+
+
+{% block shop_content %}
+<header class="mb-4">
+    <h1>Adresse de livraison</h1>
+</header>
+
+{{ form_start(address_form, { 'attr': { 'id': 'address-form' }}) }}
+    {% include "shop/account/address_form.html.twig" with {'address_form': address_form} %}
+{{ form_end(address_form) }}
+<input type="submit" form="address-form" value="Suivant" class="btn btn-primary">
+
+{% endblock %}

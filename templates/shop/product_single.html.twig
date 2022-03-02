@@ -1,0 +1,65 @@
+{% extends 'menu.html.twig' %}
+
+
+
+{% block shop_content %}
+    <section class="u-align-center u-clearfix u-valign-middle u-section-1" id="carousel_33f5">
+
+<div class="row">
+    <div class="col-md-5 pr-md-7 mb-7 mb-md-0">
+        {% set cover = product.images|first %}
+        <div class="image-container">
+            <img HEIGHT="500" width="500" src="/img/upload/{{ cover.name }}" alt="{{ cover.description }}" class="img img-fluid product-single__image">
+        </div>
+        {% if product.images.count > 1 %}
+            <div class="d-flex mt-2">
+                {% for image in product.images[1:] %}
+                    <div class="mr-2 image-container w-25">
+                        <img HEIGHT="200" width="200" src="/img/upload/{{ image.name }}" alt="{{ image.description }}" class="img img-fluid product-single__image">
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-7">
+        <header class="mb-4">
+            <h1 class="product-single__heading">{{ product.name }}</h1>
+        </header>
+        <p class="product-single__price">{{ product.price }} DT</p>
+        <div class="basket-add mb-4">
+            {% if product.hasStock %}
+                <a href="/basket/add/{{ product.id }}" class="btn btn-primary">
+                    <i class="fa fa-shopping-cart mr-2"></i>
+                    Ajouter au panier
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-secondary disabled">Rupture de stock</a>
+            {% endif %}
+        </div>
+        <p>
+            {{ product.description }}
+        </p>
+    </div>
+</div>
+
+<div class="overlay">
+    <div class="overlay__inner">
+        <div class="overlay__close">
+            <i class="fas fa-times"></i>
+        </div>
+        <button class="btn previous mr-4">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="overlay__slide">
+        </div>
+        <button class="btn next ml-4">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/productSlider.js"></script>
+{% endblock javascripts %}
