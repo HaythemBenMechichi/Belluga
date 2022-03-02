@@ -1,0 +1,34 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "E-commerce website built with Symfony",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build-dev": "./node_modules/.bin/encore dev",
+    "build-prod": "./node_modules/.bin/encore production",
+    "watch": "./node_modules/.bin/encore dev --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcoudurier/e-commerce.git"
+  },
+  "author": "Mathieu Coudurier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcoudurier/e-commerce/issues"
+  },
+  "homepage": "https://github.com/mcoudurier/e-commerce#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@symfony/webpack-encore": "^0.24.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.5.0",
+    "node-sass": "^4.13.0",
+    "popper.js": "^1.16.0",
+    "sass-loader": "^7.3.1"
+  },
+  "dependencies": {}
+}
