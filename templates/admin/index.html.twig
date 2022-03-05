@@ -1,0 +1,14 @@
+{% extends 'base_back.html.twig' %}
+{% block title %}Administration{% endblock title %}
+
+{% block admin_content %}
+    <header class="mb-4">
+        <h1>Administration</h1>
+    </header>
+    <p>{{ product_rows }} produits en vente</p>
+    <p>{{ total_revenue }} DT de chiffre d'affaires</p>
+    <div class="basket-empty">
+        <a href="/" class="btn btn-info">vers princeps</a>
+    </div>
+
+{% endblock %}

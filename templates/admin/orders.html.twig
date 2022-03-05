@@ -1,0 +1,72 @@
+{% extends 'base_back.html.twig' %}
+{% block title %}Commandes{% endblock title %}
+
+{% block admin_content %}
+<header class="mb-4">
+    <h1>Commandes</h1>
+</header>
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">tableau des Commandes</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                          {% for order in orders %}
+
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                    {{ order.id }}
+                          </div>
+                          </td>
+                          <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ order.dateCreated|date('d/m/Y à H\\hi', 'Europe/Paris') }}</h6>
+                          
+                          </div>
+                        </div>
+                      </td>
+                      
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success">{{ order.status }} </span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold"> {{ order.transaction.total }} DT</span>
+                      </td>
+                      <td class="align-middle">
+                                 <a href="{{ path('admin_order-show', { 'id': order.id }) }}" class="btn btn-info">details</a>
+
+          
+                      </td>
+                    </tr>
+                   
+                            {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {{ knp_pagination_render(orders) | raw}}
+
+{% endblock %}

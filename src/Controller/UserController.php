@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\UserContactType;
 use App\Repository\OrderRepository;
 use App\Repository\AddressRepository;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class UserController extends AbstractController
 {
@@ -73,10 +75,14 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function orders(): Response
+    public function orders(Request $request, PaginatorInterface $paginator): Response
     {
         $orders = $this->getUser()->getOrders();
-
+        $orders = $paginator->paginate(
+            $orders, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
         return $this->render('shop/account/orders.html.twig', [
             'orders' => $orders,
         ]);
