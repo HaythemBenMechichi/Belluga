@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,16 +23,19 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
      */
     private $NomC;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotNull
      */
     private $statC;
 
     /**
      * @ORM\OneToMany(targetEntity=SousCategorie::class, mappedBy="idCat")
+     * @Assert\NotNull
      */
     private $idSousCategorie;
 

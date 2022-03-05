@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -14,22 +15,28 @@ class Produit
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_product", "list_product"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull (message="vous devez saisir le libelle ") 
+     * @Groups({"show_product", "list_product"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotNull(message="vous devez saisir la description ")
+     * @Groups({"show_product", "list_product"})
      */
     private $Description;
 
     /**
      * @ORM\Column(type="integer")
-     *  
+     *  @Assert\NotNull(message="vous devez saisir la quantite ")
+     * @Groups({"show_product", "list_product"})
      * @Assert\Positive
      */
      
@@ -37,21 +44,25 @@ class Produit
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotNull(message="vous devez saisir le prix ")
+     * @Groups({"show_product", "list_product"})
      * @Assert\Positive
      */
     private $prix;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_product", "list_product"})
      */
 
     private $imageP;
 
     /**
      * @ORM\ManyToOne(targetEntity=SousCategorie::class)
+     * @Groups({"list_product"})
      */
     private $idSousCat;
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -128,7 +139,11 @@ class Produit
 
         return $this;
     }   
-
+ 
+    public function __toString()
+    {
+        return $this->idSousCat;
+    }
 
 
 }

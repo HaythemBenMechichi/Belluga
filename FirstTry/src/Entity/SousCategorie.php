@@ -57,7 +57,6 @@ class SousCategorie
     public function setStatSC(int $StatSC): self
     {
         $this->StatSC = $StatSC;
-
         return $this;
     }
 

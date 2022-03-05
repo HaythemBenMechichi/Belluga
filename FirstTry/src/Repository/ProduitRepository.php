@@ -19,6 +19,26 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+
+     public function findEntitiesByString($str)
+     {
+       return $this->getEntityManager()
+         ->createQuery(
+            'SELECT p FROM App:produit p where p.libelle LIKE :str'
+        )
+        ->setParameter('str','%'.$str.'%')
+        ->getResult();  
+
+     }
+
+    // function findEntitiesByString($str){
+    //     return  $this->createQueryBuilder('p')
+    //         ->where('p.produit LIKE ?1' )
+    //         ->setParameter('1','%'.$str.'%')
+    //         ->getQuery()->getResult();
+    //     //setMaxResults(2);
+    // }    
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
