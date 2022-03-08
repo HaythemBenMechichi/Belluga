@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\PassType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
@@ -93,16 +94,9 @@ class UserController extends AbstractController
     public function passsa(Request $request,$id , EntityManagerInterface $entityManager, UserRepository $rep, UserPasswordEncoderInterface $encoder): Response
     {
         $user=$rep->find($id);
-        $form = $this->createForm(UserType::class, $user);
-        $form->add('password',RepeatedType::class, [
-            'type' => PasswordType::class,
-            'invalid_message' => 'The password fields must match.',
-            'options' => ['attr' => ['class' => 'password-field']],
-            'required' => true,
-            'first_options'  => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password'],
-        ]);
+        $form = $this->createForm(PassType::class, $user);
         $form->add('save',SubmitType::class);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -214,7 +208,6 @@ class UserController extends AbstractController
     {
         $user=$rep->find($id);
         $form = $this->createForm(UserType::class, $user);
-        $form->add('role');
         $form->add('save',SubmitType::class);
         $form->handleRequest($request);
 

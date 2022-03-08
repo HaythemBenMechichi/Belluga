@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64614038-7dc3-4bc6-b9b1-f372c9186d74" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FirstTry/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/src/Controller/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Controller/ProduitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/templates/user/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/templates/user/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/templates/user/profile.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/templates/user/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/templates/user/update.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +74,7 @@
       <updated>1646746513511</updated>
       <workItem from="1646746514687" duration="809000" />
       <workItem from="1646747396412" duration="1390000" />
-      <workItem from="1646748937597" duration="1201000" />
+      <workItem from="1646748937597" duration="5616000" />
     </task>
     <servers />
   </component>
