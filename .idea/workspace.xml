@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="64614038-7dc3-4bc6-b9b1-f372c9186d74" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FirstTry/src/Security/AppauthentificatorAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Security/AppauthentificatorAuthenticator.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +69,7 @@
       <updated>1646746513511</updated>
       <workItem from="1646746514687" duration="809000" />
       <workItem from="1646747396412" duration="1390000" />
-      <workItem from="1646748937597" duration="7336000" />
+      <workItem from="1646748937597" duration="8410000" />
     </task>
     <servers />
   </component>
