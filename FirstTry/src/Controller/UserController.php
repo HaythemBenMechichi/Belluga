@@ -63,8 +63,6 @@ class UserController extends AbstractController
             ),
                 'text/html'
             )
-
-
         ;
 
         $mailer->send($message);
