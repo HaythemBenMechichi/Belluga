@@ -103,7 +103,7 @@ class ProduitController extends AbstractController
   /**
      * @Route("/ajoutProduit", name="AjoutProduit", methods={"GET", "POST"})
      */
-    public function addproduits(Request $request, \Swift_Mailer $mailer, UserRepository $repo): Response
+    public function addproduits(Request $request): Response
     {
         $produits = new produit();
         $form = $this->createForm(FormProduitType::class, $produits);
