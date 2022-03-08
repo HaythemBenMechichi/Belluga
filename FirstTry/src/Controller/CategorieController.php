@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorie;
 use App\Entity\Produit;
 
+use App\Entity\SousCategorie;
 use App\Form\AjoutCatType;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,6 +44,19 @@ class CategorieController extends AbstractController
            "categories" => $categories, "produits" => $produits,    
          ]);
       }
+
+     /**
+     * @Route("/produit/{id}", )
+     */
+    public function afficheProdTri($id)
+    {
+        $sous=$this->getDoctrine()->getRepository(SousCategorie::class)->findOneBy([ 'idCat' => $id]);
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy([ 'idSousCat' =>$sous]);
+        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
+        return $this->render('Front-office/produit/Tri.html.twig', [
+            "produits" => $produits,"categories" => $categories
+        ]);
+    }
 
 
 

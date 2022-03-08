@@ -13,7 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Bundle\SnappyBundle\Snappy;
 use AppBundle\Entity\Entity;
 use AppBundle\Repository\EntityRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,11 +38,6 @@ class ProduitController extends AbstractController
     }
 
    
-
-     
-
-
-
 
      /**
      * @Route("/table", name="affiche")
@@ -74,27 +70,9 @@ class ProduitController extends AbstractController
     
     }
 
-
-
-
-    
-
-     /**
-     * @Route("/produit/{id}", name="affiche_TRI")
-     */
-    public function afficheProdTri($id)
-    {
-        $sous=$this->getDoctrine()->getRepository(SousCategorie::class)->findOneBy([ 'idCat' => $id]);
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy([ 'idSousCat' =>$sous]);
-        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
-        return $this->render('Front-office/produit/Tri.html.twig', [
-            "produits" => $produits,"categories" => $categories
-        ]);
-    }
-
      
      /**
-     * @Route("/produit/tri", name="affiche_TRI")
+     * @Route("/tri", name="affichRI")
      */
     public function afficheProdFiltre()
     {
@@ -108,7 +86,7 @@ class ProduitController extends AbstractController
 
 
      /**
-     * @Route("/produit/triD", name="affiche_TRI")
+     * @Route("/triD", name="affiche_TRI")
      */
     public function afficheProdFiltreD()
     {
@@ -125,7 +103,7 @@ class ProduitController extends AbstractController
   /**
      * @Route("/ajoutProduit", name="AjoutProduit", methods={"GET", "POST"})
      */
-    public function addproduits(Request $request): Response
+    public function addproduits(Request $request, \Swift_Mailer $mailer, UserRepository $repo): Response
     {
         $produits = new produit();
         $form = $this->createForm(FormProduitType::class, $produits);
@@ -200,25 +178,19 @@ function UpdateProd(ProduitRepository $repository,$id,Request $request)
 
 
 
-
-
     /** 
-    * @Route ("/search", name="Search")
+    * @Route ("/produit", name="Search")
     */
    public function searchAction(Request $request,ProduitRepository $rep)
 {
-    $em=$this->getDoctrine()->getManager();
-    $requestString=$request->get('q');
-    $entities =  $rep->findEntitiesByString($requestString);
- if(!$entities)
- {
-     $result['entities']['error'] = "aucun Produit";
- }
- else
- {
-    $result['entities'] = $this->getRealEntities($entities);
- }
- return new Response(json_encode($result));
+    $requestString=$request->get('searchValue');
+    $entities =$rep->findEntitiesByString($requestString);
+    if(!$entities) {
+        $result['entities']['error'] = "AUcun produit trouve";
+    } else {
+        $result['entities'] = $this->getRealEntities ($entities); 
+    }
+    return new Response (json_encode ($result));
 } 
 
 public function getRealEntities($entities){
@@ -226,5 +198,39 @@ public function getRealEntities($entities){
     {
         $realEntities[$entity->getId()]=[$entity->getImageP(),$entity->getLibelle()];
     }
+    return $realEntities;
 }
+/** 
+* @Route("/pdf", name="pdf_generation")
+*/
+public function indexAction()
+{
+ $snappy= $this->get('knp_snappy.pdf');
+ $titre = ' Description PDF';
+/* render view, you can pass variables here to template view /
+ $html = $this->renderView('pdf_template.html.twig', array(
+     'title' => $title,
+ ));
+
+/* set output file name and force pdf download in browser with PDFResponse */
+ $filename = 'Sample.pdf';
+
+
+// return new PdfResponse(
+//       $snappy ->getOutputFromHtml($html),
+//      $filename
+//  );
 }
+
+
+
+
+}
+
+
+
+
+
+
+
+

@@ -67,7 +67,6 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
 
 									<select class="input-select">
 										<option value="0">All</option>
@@ -76,59 +75,66 @@
 										<option value="1">{{categorie.NomC}}</option>
                                         {% endfor %}  
 									</select>
-									<input class="input" type="text" id="search" placeholder="Search here">
+	</div>
+						</div>
+                  			      {# <input type="text" id="search" class="form-control" placeholder="Search here">
 
-									<button class="search-btn">Search</button>
 								<ul class="nav" id="side-menu">
-								<li>
-									<a href="#"> Search Results <span class"fa arrow"></span><a/>
-								</li>
-																</form>
-
 							</div>
 						</div>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-       <script type="text/javascript">
-                jQuery(document).ready(function() {
-                    var searchRequest = null;
-                    $("#search").keyup(function() {
-                        var minlength = 1;
-                        var that = this;
-                        var value = $(this).val();
-                        var entitySelector = $("#entitiesNav").html('');
-                        if (value.length >= minlength ) {
-                            if (searchRequest != null)
-                                searchRequest.abort();
-                            searchRequest = $.ajax({
-                                type: "GET",
-                                url: "{{ path('produit') }}",
-                                data: {
-                                    'q' : value
-                                },
-                                dataType: "text",
-                                success: function(msg){
-                                    //we need to check if the value is the same
-                                    if (value===$(that).val()) {
-                                        var result = JSON.parse(msg);
-                                        $.each(result, function(key, arr) {
-                                            $.each(arr, function(id, value) {
-                                                if (key === 'posts') {
-                                                    if (id !== 'error') {
-                                                        console.log(value[1]);
-                                                        entitySelector.append('<li><b>'+value[1]+'</b><a href="/produit/'+id+'">'+'<img src="/assets/img/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
-                                                    } else {
-                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
-                                                    }
-                                                }
-                                            });
-                                        });
-                                    }
-                                }
-                            });
+           <div class="row" id="search">
+                    
+
+                </div>
+                <br><br><br><br>
+            </div>
+        </section>
+
+
+
+            </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('produit') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'entities') {
+                                            if (id !== 'error') {
+                                                entitySelector.append('<li>'+value[1]+'<a href="/show_chef/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 50px; height: 50px; border-radius:50%; "/></a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
                         }
                     });
-                });
-            </script>
+                }
+            });
+        });
+    </script> #}
 
 
 

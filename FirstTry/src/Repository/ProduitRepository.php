@@ -20,21 +20,22 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
 
-     public function findEntitiesByString($str)
-     {
-       return $this->getEntityManager()
-         ->createQuery(
-            'SELECT p FROM App:produit p where p.libelle LIKE :str'
-        )
-        ->setParameter('str','%'.$str.'%')
-        ->getResult();  
 
-     }
+
+    
+    public function findEntitiesByString($title)
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.libelle LIKE :titre')
+            ->setParameter('titre', '%'.$title.'%')
+            ->getQuery()
+            ->getResult();
+    }  
 
     // function findEntitiesByString($str){
     //     return  $this->createQueryBuilder('p')
     //         ->where('p.produit LIKE ?1' )
-    //         ->setParameter('1','%'.$str.'%')
+    //         ->setParameter('1','%'.$str.'%'  )
     //         ->getQuery()->getResult();
     //     //setMaxResults(2);
     // }    
