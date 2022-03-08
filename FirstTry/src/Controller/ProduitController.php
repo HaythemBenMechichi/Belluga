@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 
 
@@ -66,8 +65,6 @@ class ProduitController extends AbstractController
         return $this->render('Front-office/produit/DetailedProduit.html.twig', [
             "produit" => $produit,"categories" => $categories,"prods"=>$prods
         ]);
-    
-    
     }
 
      
