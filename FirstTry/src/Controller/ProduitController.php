@@ -26,7 +26,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class ProduitController extends AbstractController
 {
     /**
-     * @Route("/produit", name="produit")
+     * @Route("/produit", name="page_principale")
      */
     public function index(): Response
     {
