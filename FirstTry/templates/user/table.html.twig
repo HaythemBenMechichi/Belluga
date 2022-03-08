@@ -113,13 +113,16 @@
                                     <td colspan="9">no records found</td>
                                 </tr>
                             {% endfor %}
-                            {{ knp_pagination_render(users) }}
 
                             </tbody>
+                            
                         </table>
+                        
                     </div>
                 </div>
             </div>
+                                        {{ knp_pagination_render(users) }}
+
         </div>
     </div>
             {{ include('user/footerback.html.twig') }}

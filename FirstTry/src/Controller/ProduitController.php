@@ -15,14 +15,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Bundle\SnappyBundle\Snappy;
-use AppBundle\Entity\Entity;
-use AppBundle\Repository\EntityRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 
 
@@ -38,28 +36,24 @@ class ProduitController extends AbstractController
         ]);
     }
 
-   
 
      /**
-     * @Route("/table", name="affiche")
+     * @Route("/tables", name="affiche", methods={"GET"})
      */
-    public function afficheProd()
+    public function afficheProd(PaginatorInterface $paginator,Request $request): Response
     {
-
         $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
         $donnees = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $produits = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5// Nombre de résultats par page
+            6 // Nombre de résultats par page
         );
-
         return $this->render('Back-Office/table.html.twig', [
-            "produits" => $produits,"categories" => $categories,
+            'produits' => $produits,'categories'=>$categories
         ]);
-    }
 
-
+    }   
      /**
      * @Route("/DetailedProduit/{idSousCat}/{id}", name="affiche_Detailed")
      */
@@ -68,9 +62,7 @@ class ProduitController extends AbstractController
         $sous=$this->getDoctrine()->getRepository(SousCategorie::class)->findOneBy([ 'nomSous' => $idSousCat]);
         $produit = $this->getDoctrine()->getRepository(Produit::class)->find($id);
         $prods = $this->getDoctrine()->getRepository(Produit::class)->findBy([ 'idSousCat' =>$sous]);
-
         $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
-
         return $this->render('Front-office/produit/DetailedProduit.html.twig', [
             "produit" => $produit,"categories" => $categories,"prods"=>$prods
         ]);

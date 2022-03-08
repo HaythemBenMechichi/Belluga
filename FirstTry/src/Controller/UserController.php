@@ -68,7 +68,7 @@ class UserController extends AbstractController
 
         $mailer->send($message);
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
-    }
+     }
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -79,7 +79,7 @@ class UserController extends AbstractController
         $users = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5// Nombre de résultats par page
+            3// Nombre de résultats par page
         );
 
         return $this->render('user/table.html.twig', [

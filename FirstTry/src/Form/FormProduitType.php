@@ -21,7 +21,11 @@ class FormProduitType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('Description' , CKEditorType::class)
+            ->add('Description',CKEditorType::class, array(
+                'config' => array(
+                    'uiColor' => '#ffffff',
+                    //...
+                )))
             ->add('Quantite')
             ->add('prix')
             ->add('imageP', FileType::class,['mapped'=>false,'required'=>false])
