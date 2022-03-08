@@ -63,7 +63,18 @@
                                         </div>
                                     </td>
                                 <td>
+                                    {% for role in user.role %}
+                                        {% if role=="ROLE_USER" %}
 
+                                        <h6 class="mb-0 text-sm">SIMPLE USER</h6>
+                                        {% elseif role=="ROLE_EDITOR" %}
+                                            <h6 class="mb-0 text-sm">LIVREUR USER</h6>
+                                        {% elseif role=="ROLE_ADMIN" %}
+                                            <h6 class="mb-0 text-sm">ADMIN USER</h6>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                    <h6 class="mb-0 text-sm">{{ user.nom }} {{ user.prenom }}</h6>
                                     <p class="text-xs text-secondary mb-0">{{ user.age }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
