@@ -92,7 +92,7 @@ class AppauthentificatorAuthenticator extends AbstractFormLoginAuthenticator imp
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($this->urlGenerator->generate('user_index'));
+            return new RedirectResponse($this->urlGenerator->generate('page_principale'));
         }
         return new RedirectResponse($this->urlGenerator->generate('page_principale'));
 
