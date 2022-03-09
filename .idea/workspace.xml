@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="64614038-7dc3-4bc6-b9b1-f372c9186d74" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstTry/templates/user/table.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/FirstTry/templates/user/table.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +68,8 @@
       <updated>1646746513511</updated>
       <workItem from="1646746514687" duration="809000" />
       <workItem from="1646747396412" duration="1390000" />
-      <workItem from="1646748937597" duration="9554000" />
+      <workItem from="1646748937597" duration="10318000" />
+      <workItem from="1646834845582" duration="2368000" />
     </task>
     <servers />
   </component>
