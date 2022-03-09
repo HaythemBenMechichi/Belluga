@@ -121,7 +121,7 @@ class UserController extends AbstractController
      * @param $builder
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder , \Swift_Mailer $mailer): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder ,GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user );
@@ -149,6 +149,7 @@ class UserController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setFlag(0);
+            $user->setActivationToken(md5(uniqid()));
             $entityManager->persist($user);
             $entityManager->flush();
             $message = (new \Swift_Message('activation mail'))
@@ -158,7 +159,7 @@ class UserController extends AbstractController
                 ->setBody($this->renderView(
                 // templates/emails/registration.html.twig
                     'user/registration.html.twig',
-                    ['user' => $user]
+                    ['token' => $user->getActivationToken()]
                 ),
                     'text/html'
                 )
@@ -167,6 +168,13 @@ class UserController extends AbstractController
             ;
 
             $mailer->send($message);
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -177,7 +185,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/activate/{id}", name="activated", methods={"GET"})
+     * @Route("/activate/{token}", name="activated", methods={"GET"})
      */
     public function activate(User $user, EntityManagerInterface $entityManager): Response
     {
@@ -186,6 +194,30 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'user' => $user,
         ]);
+    }
+    public function activation($token, UserRepository $user)
+    {
+        // On recherche si un utilisateur avec ce token existe dans la base de données
+        $us = $user->findOneBy(['activation_token' => $token]);
+
+        // Si aucun utilisateur n'est associé à ce token
+        if(!$us){
+            // On renvoie une erreur 404
+            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+        }
+
+        // On supprime le token
+        $us->setFlag(1);
+        $us->setActivationToken(null);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($us);
+        $entityManager->flush();
+
+        // On génère un message
+        $this->addFlash('message', 'Utilisateur activé avec succès');
+
+        // On retourne à l'accueil
+        return $this->redirectToRoute('page_principale');
     }
 
     /**
