@@ -1,0 +1,50 @@
+{% for e in evenement %}
+    <tr>
+    <tr>
+    <td>
+        <div class="d-flex px-2 py-1">
+
+            <div class="d-flex flex-column justify-content-center">
+                <center><h6 class="mb-0 text-sm">{{ e.nom }}</h6></center>
+            </div>
+        </div>
+    </td>
+
+    <td>
+    {% if e.DateDebut|date('Y-m-d') > "now"|date('Y-m-d') and e.DateFin|date('Y-m-d') > "now"|date('Y-m-d') %}
+        <span class="badge badge-sm bg-gradient-dark">Bientôt</span>
+    {% elseif e.DateDebut|date('Y-m-d') <= "now"|date('Y-m-d') and e.DateFin|date('Y-m-d') > "now"|date('Y-m-d') %}
+        <span class="badge badge-sm bg-gradient-success">Actif</span>
+    {% elseif e.DateDebut|date('Y-m-d') < "now"|date('Y-m-d') and e.DateFin|date('Y-m-d') < "now"|date('Y-m-d') %}
+        <span class="badge badge-sm bg-gradient-danger">Inactif</span>
+    {%  endif %}
+    </td>
+    <td>
+        <center> <p class="text-xs font-weight-bold mb-0">{{ e.Datedebut | date}}</p></center>
+    </td>
+    <td class="align-middle text-center text-sm">
+        <center>  <span class="badge badge-sm bg-gradient-secondary"> {{ e.Datefin | date }}</span></center>
+    </td>
+    <td class="align-middle text-center text-sm">
+        <span class="badge badge-sm bg-gradient-secondary"><img height="120" width="200" src="{{ asset('uploads/') ~ e.image  }}" alt="image"   ></span>
+    </td>
+
+
+
+
+    <td class="align-middle">
+
+        <a href=" {{ path('updateEvt',{'id':e.id}) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+            Edit
+        </a>
+    </td>
+    <td class="align-middle">
+    <a href=" {{ path('delete',{'id':e.id}) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+        Delete
+    </a>
+
+{% else %}
+    <tr>
+        <td colspan="9">no records found</td>
+    </tr>
+{% endfor %}
